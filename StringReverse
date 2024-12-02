@@ -1,0 +1,33 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+// The main method must be in a class named "Main".
+public class StringReverse {
+    public static void main(String[] args) {
+        
+        try(BufferedReader br = new BufferedReader(new FileReader("I://input.txt"));
+           FileWriter fw = new FileWriter("I://output.txt")) {
+            String str = "";
+            int i;
+            while((i = br.read()) != -1 )
+                {
+                    str += (char)i;
+                }
+
+            char[] reverseArray = str.toCharArray();
+            String reverseString = "";
+
+            for(int j = reverseArray.length -1 ;j>=0; j--)
+                {
+                    reverseString += (char)reverseArray[j];
+                }
+            fw.write(reverseString);
+            
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+}
