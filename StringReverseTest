@@ -1,0 +1,34 @@
+import org.junit.Before;
+import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import java.io.*;
+import org.apache.commons.io.FileUtils;
+
+public class StringReverseTest {
+    
+    private static File tempFile;
+    
+    @Before
+    public void setUp() throws IOException
+    {
+        tempFile = File.createTempFile("test",".txt");
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(tempFile)))
+        {
+            bw.write("Hello World");
+        }
+    }
+    
+    @Test
+    public void testRead_success() throws IOException
+    {
+        String content = FileUtils.readFileToString(tempFile.getAbsoluteFile());
+        assertEquals("Hello World", content);
+    }
+    public void testRead_failure() throws IOException
+    {
+        String content = FileUtils.readFileToString(tempFile.getAbsoluteFile());
+        assertNotEquals("Hello", content);
+    }
+    
+}
